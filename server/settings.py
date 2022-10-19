@@ -204,5 +204,8 @@ AUTHENTICATION_BACKENDS = (
 #     }
 # }
 SITE_ID = 1
+REST_USE_JWT = True
+
+
 
 django_heroku.settings(locals())
