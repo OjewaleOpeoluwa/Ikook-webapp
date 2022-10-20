@@ -57,7 +57,8 @@ INSTALLED_APPS = [
 
 
     # Local apps
-    "accounts.apps.AccountsConfig"
+    "accounts.apps.AccountsConfig",
+    "menu.apps.MenuConfig"
 ]
 
 MIDDLEWARE = [
@@ -180,31 +181,12 @@ AUTHENTICATION_BACKENDS = (
 
 # SITE_ID = 3
 
-# SOCIALACCOUNT_PROVIDERS = {
-#     'facebook': {
-#         'METHOD': 'oauth2',
-#         'SCOPE': ['email', 'public_profile', 'user_friends'],
-#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-#         'INIT_PARAMS': {'cookie': True},
-#         'FIELDS': [
-#             'id',
-#             'email',
-#             'name',
-#         ],
-#         'EXCHANGE_TOKEN': True,
-#         'LOCALE_FUNC': 'path.to.callable',
-#         'VERIFIED_EMAIL': True,
-#         'VERSION': 'v2.12',
-#         'APP': {
-#             # get the key from "https://developers.facebook.com/apps/615248019004301/settings/basic/"
-#             'client_id': '683735529519572',
-#             'secret': '4b23cc57d8710d6ea32003e6b336b653',
-#             'key': ''
-#         }
-#     }
-# }
 SITE_ID = 1
 REST_USE_JWT = True
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+        'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
+}
 
 
 
