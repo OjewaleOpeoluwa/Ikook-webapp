@@ -13,6 +13,7 @@ class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
+    phone_no = serializers.CharField(write_only = True)
 
     def validate_username(self, username):
         username = get_adapter().clean_username(username)
@@ -45,6 +46,7 @@ class RegisterSerializer(serializers.Serializer):
             'username': self.validated_data.get('username', ''),
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
+            'phone_no': self.validated_data.get('phone_no','')
         }
 
     def save(self, request):
