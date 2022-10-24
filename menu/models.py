@@ -14,7 +14,7 @@ class SetMenu(models.Model):
     cusine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
     desc = models.CharField(max_length=255, null=True)
     price = models.FloatField(verbose_name='Starting Price')
-    status = models.CharField
+    status = models.CharField(max_length=255,blank=True)
 
 class addons(models.Model):
     menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='menu_addons',null=True)
