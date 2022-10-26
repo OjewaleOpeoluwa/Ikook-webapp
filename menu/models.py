@@ -5,55 +5,93 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager,User
 from django.conf import settings
 
+
+
+
 class Cuisine (models.Model):
     name = models.CharField(max_length=75)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+
+class addons(models.Model):
+    # menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='menu_addons',null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=75)
+
+    def __str__(self) -> str:
+        return self.title
+
+class mainMenu(models.Model):
+    # menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='main_menu',null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=125)
+    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
+    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
+
+
+    def __str__(self) -> str:
+        return self.title
+
+class sideMenu(models.Model):
+    # menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='side_menu',null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=125)
+    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
+    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+class dessertMenu(models.Model):
+    # menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='dessert_menu',null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=125)
+    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
+    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+class starterMenu(models.Model):
+    # menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='starter_menu',null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=125)
+    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
+    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+
+
+# class menuGallery(models.Model):
+#     banner_photo = models.ImageField(upload_to='uploads/menu/gallery/%Y/%m/%d/', blank=True, null=True)
+
 
 class SetMenu(models.Model):
     title = models.CharField(max_length=155)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    cusine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
+    cusine = models.ManyToManyField(Cuisine,related_name="cusines",blank=True)
+    addons = models.ManyToManyField(addons,related_name="addons",blank=True)
+    main_menu = models.ManyToManyField(mainMenu,related_name="main_menu",blank=True)
+    side_menu = models.ManyToManyField(sideMenu,related_name="side_menu",blank=True)
+    dessert_menu = models.ManyToManyField(dessertMenu,related_name="dessert_menu",blank=True)
+    starter_menu = models.ManyToManyField(starterMenu,related_name="starter_menu",blank=True)
     desc = models.CharField(max_length=255, null=True)
     price = models.FloatField(verbose_name='Starting Price')
     status = models.CharField(max_length=255,blank=True)
 
-class addons(models.Model):
-    menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='menu_addons',null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=75)
-
-class mainMenu(models.Model):
-    menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='main_menu',null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=125)
-    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
-    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
-
-class sideMenu(models.Model):
-    menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='side_menu',null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=125)
-    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
-    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
-
-class dessertMenu(models.Model):
-    menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='dessert_menu',null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=125)
-    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
-    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
-    
-class starterMenu(models.Model):
-    menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='starter_menu',null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=125)
-    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
-    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
+    def __str__(self) -> str:
+        return self.title
 
 class MenuReviews(models.Model):
     menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='menu_reviews',null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     rate = models.IntegerField(null=True)
     review = models.TextField(null=True)
-    
-# class menuGallery(models.Model):
-#     banner_photo = models.ImageField(upload_to='uploads/menu/gallery/%Y/%m/%d/', blank=True, null=True)
+
+    def __str__(self) -> str:
+        return str(self.author)

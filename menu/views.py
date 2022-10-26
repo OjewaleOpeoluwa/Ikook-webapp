@@ -6,11 +6,15 @@ from .serializers import (CuisineSerializers,SetMenuSerializers,AddonsSerializer
                             MenuReviewsSerializers)
 from .models import (Cuisine,SetMenu,addons,mainMenu,sideMenu,dessertMenu,starterMenu,MenuReviews)
 
+from .permissions import CustomAccessPermissions
+
+
 class CuisineViewSet(generics.ListCreateAPIView):
     serializer_class = CuisineSerializers
     queryset = Cuisine.objects.all()
 
 class SetMenuViewSet(generics.ListCreateAPIView):
+    permission_classes = [CustomAccessPermissions]
     serializer_class = SetMenuSerializers
     queryset = SetMenu.objects.all()
 
