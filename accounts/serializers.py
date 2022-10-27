@@ -5,7 +5,22 @@ from allauth.account import app_settings as allauth_settings
 from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
+from django.conf import settings
+from rest_auth.serializers import PasswordResetSerializer as _PasswordResetSerializer
 
+class PasswordResetSerializer(_PasswordResetSerializer):
+    def save(self):
+        request = self.context.get('request')
+        opts = {
+            # 'use_https': request.is_secure(),
+            'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL'),
+
+            ###### USE YOUR TEXT FILE ######
+            'email_template_name': 'password_reset_email.html',
+
+            'request': request,
+        }
+        self.reset_form.save(**opts)
 
 class RegisterSerializer(serializers.Serializer):
     first_name = serializers.CharField(required=True, write_only=True)

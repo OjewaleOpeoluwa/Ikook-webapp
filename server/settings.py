@@ -78,7 +78,7 @@ ROOT_URLCONF = "server.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -166,6 +166,12 @@ REST_FRAMEWORK = {
    ),
 }
 
+REST_AUTH_SERIALIZERS = {
+    'PASSWORD_RESET_SERIALIZER': 
+        'accounts.serializers.PasswordResetSerializer',
+}
+
+
 
 #This is required otherwise it asks for email server
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -206,7 +212,7 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL') # this is the sendgrid email
 
 AUTH_USER_MODEL = 'accounts.MyUser'  
 
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
-
+# ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+SECURE_SSL_REDIRECT = False
 
 django_heroku.settings(locals())
