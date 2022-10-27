@@ -212,7 +212,7 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL') # this is the sendgrid email
 
 AUTH_USER_MODEL = 'accounts.MyUser'  
 
-# ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
-SECURE_SSL_REDIRECT = False
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+SECURE_SSL_REDIRECT = True
 
 django_heroku.settings(locals())
