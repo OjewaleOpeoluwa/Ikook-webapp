@@ -67,9 +67,8 @@ class starterMenu(models.Model):
 
 
 
-# class menuGallery(models.Model):
-#     banner_photo = models.ImageField(upload_to='uploads/menu/gallery/%Y/%m/%d/', blank=True, null=True)
-
+class MenuGallery(models.Model):
+    banner_photo = models.URLField(max_length=255, blank=True, null=True)
 
 class SetMenu(models.Model):
     title = models.CharField(max_length=155)
@@ -83,6 +82,7 @@ class SetMenu(models.Model):
     desc = models.CharField(max_length=255, null=True)
     price = models.FloatField(verbose_name='Starting Price')
     status = models.CharField(max_length=255,blank=True)
+    menu_gallery = models.ManyToManyField(MenuGallery,related_name="gallery")
 
     def __str__(self) -> str:
         return self.title
@@ -95,3 +95,4 @@ class MenuReviews(models.Model):
 
     def __str__(self) -> str:
         return str(self.author)
+
