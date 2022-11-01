@@ -8,6 +8,9 @@ from allauth.account.utils import setup_user_email
 from django.conf import settings
 from rest_auth.serializers import PasswordResetSerializer as _PasswordResetSerializer
 
+from .models import ChefProfile
+
+
 class PasswordResetSerializer(_PasswordResetSerializer):
     def save(self):
         request = self.context.get('request')
@@ -80,3 +83,9 @@ class RegisterSerializer(serializers.Serializer):
         self.custom_signup(request, user)
         setup_user_email(request, user, [])
         return user
+
+
+class ChefProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChefProfile
+        fields = ['headline','languages','bio']

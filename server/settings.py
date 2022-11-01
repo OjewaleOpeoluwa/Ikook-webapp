@@ -227,7 +227,7 @@ EMAIL_HOST = 'smtp-relay.sendinblue.com'
 
 AUTH_USER_MODEL = 'accounts.MyUser'  
 
-# ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
-# SECURE_SSL_REDIRECT = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+SECURE_SSL_REDIRECT = True
 
 django_heroku.settings(locals())

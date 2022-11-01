@@ -5,6 +5,11 @@ from rest_auth.registration.views import SocialLoginView,SocialConnectView
 from rest_auth.registration.serializers import SocialLoginSerializer 
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 
+from rest_framework import generics
+
+from .models import ChefProfile
+
+from .serializers import ChefProfileSerializer
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
@@ -94,3 +99,12 @@ class GoogleConnect(SocialConnectView):
 #             None,
 #         )
 #         return user
+
+
+class ChefProfileList(generics.ListCreateAPIView):
+    serializer_class = ChefProfileSerializer
+    queryset = ChefProfile.objects.all()
+
+class ChefProfileDetail(generics.RetrieveAPIView):
+    serializer_class = ChefProfileSerializer
+    queryset = ChefProfile.objects.all()
