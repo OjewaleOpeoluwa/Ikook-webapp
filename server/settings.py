@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'storages',
     'corsheaders',
+    'anymail',
 
 
     # Local apps
@@ -201,18 +202,32 @@ REST_AUTH_REGISTER_SERIALIZERS = {
         'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
 }
 
+# Twilio Sendgrid
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') # this is your API key
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') # this is your API key
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL') # this is the sendgrid email
+# EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL') # this is the sendgrid email
+
+
+# SendinBlue
+EMAIL_FROM = config('EMAIL_FROM')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
+ANYMAIL = {
+    "SENDINBLUE_API_KEY": config('SENDINBLUE_API_KEY')
+}
+SENDINBLUE_API_URL = "https://api.sendinblue.com/v3/"
+EMAIL_HOST = 'smtp-relay.sendinblue.com'
+
 
 AUTH_USER_MODEL = 'accounts.MyUser'  
 
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
-SECURE_SSL_REDIRECT = True
+# ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+# SECURE_SSL_REDIRECT = True
 
 django_heroku.settings(locals())
