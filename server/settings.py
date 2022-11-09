@@ -235,13 +235,14 @@ FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id,name,email', # needed starting from protocol v2.4
 }
-SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
-    ('name', 'name'),
-    ('email', 'email'),
-    ('picture', 'picture'),
-    ('link', 'profile_url'),
-]
- 
+SOCIALACCOUNT_PROVIDERS =  { 'facebook':
+                               {'METHOD': 'oauth2',
+                                'SCOPE': ['email'],
+                                'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+                                'LOCALE_FUNC': lambda request: 'en_US',
+                                'VERSION': 'v2.4'
+                               }
+                           }
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
 
