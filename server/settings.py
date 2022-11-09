@@ -232,8 +232,8 @@ SECURE_SSL_REDIRECT = True
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
-  'fields': 'id, name, email, picture.type(large), link'
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email', # needed starting from protocol v2.4
 }
 SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
     ('name', 'name'),
