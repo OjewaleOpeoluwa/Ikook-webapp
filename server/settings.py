@@ -230,4 +230,11 @@ AUTH_USER_MODEL = 'accounts.MyUser'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 SECURE_SSL_REDIRECT = True
 
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email', 
+}
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+
 django_heroku.settings(locals())
