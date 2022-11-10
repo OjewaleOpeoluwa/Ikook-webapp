@@ -20,6 +20,8 @@ class addons(models.Model):
     # menu = models.ForeignKey(SetMenu, on_delete=models.SET_NULL, related_name='menu_addons',null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=75)
+    s_price = models.CharField(max_length=125, verbose_name='Sharing price', null=True)
+    p_price = models.CharField(max_length=125, verbose_name='platted price', null=True)
 
     def __str__(self) -> str:
         return self.title

@@ -230,20 +230,32 @@ AUTH_USER_MODEL = 'accounts.MyUser'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 SECURE_SSL_REDIRECT = True
 
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
-FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id,name,email', # needed starting from protocol v2.4
+  'locale': 'en_US',
+  'fields': 'id, name, email, age_range'
 }
-SOCIALACCOUNT_PROVIDERS =  { 'facebook':
-                               {'METHOD': 'oauth2',
-                                'SCOPE': ['email'],
-                                'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-                                'LOCALE_FUNC': lambda request: 'en_US',
-                                'VERSION': 'v2.4'
-                               }
-                           }
-SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+
+SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
+
+
+
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
+# FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+#     'fields': 'id,name,email', # needed starting from protocol v2.4
+# }
+# SOCIALACCOUNT_PROVIDERS =  { 'facebook':
+#                                {'METHOD': 'oauth2',
+#                                 'SCOPE': ['email'],
+#                                 'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#                                 'LOCALE_FUNC': lambda request: 'en_US',
+#                                 'VERSION': 'v2.4'
+#                                }
+#                            }
+# SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
 
 
