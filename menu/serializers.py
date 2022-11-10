@@ -17,7 +17,7 @@ class SetMenuSerializers(serializers.ModelSerializer):
 class AddonsSerializers(serializers.ModelSerializer):
     class Meta:
         model = addons
-        fields = ['author','title']
+        fields = ['author','title','s_price','p_price']
 
 class MainMenuSerializers(serializers.ModelSerializer):
     class Meta:
