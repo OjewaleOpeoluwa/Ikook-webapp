@@ -3,8 +3,9 @@ from rest_framework import generics
 
 from .serializers import (CuisineSerializers,SetMenuSerializers,AddonsSerializers,MainMenuSerializers,
                             SideMenuSerializers,DessertMenuSerializers,StarterMenuSerializers,
-                            MenuReviewsSerializers,MenuGallerySerializers)
-from .models import (Cuisine,SetMenu,addons,mainMenu,sideMenu,dessertMenu,starterMenu,MenuReviews,MenuGallery)
+                            MenuReviewsSerializers,MenuGallerySerializers,CheckOutSerializer)
+from .models import (Cuisine,SetMenu,addons,mainMenu,sideMenu,dessertMenu,starterMenu,MenuReviews,MenuGallery,
+                    CheckOut)
 
 from .permissions import IsProfileChef
 
@@ -45,3 +46,9 @@ class MenuReviewsViewSet(generics.ListCreateAPIView):
 class MenuGalleryViewSet(generics.ListCreateAPIView):
     serializer_class = MenuGallerySerializers
     queryset = MenuGallery.objects.all()
+
+class CheckOutViewSet(generics.ListCreateAPIView):
+    serializer_class = CheckOutSerializer
+    queryset = CheckOut.objects.all()
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

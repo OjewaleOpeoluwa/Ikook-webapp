@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import (Cuisine,SetMenu,addons,mainMenu,
                     sideMenu,dessertMenu,starterMenu,MenuReviews
-                    ,MenuGallery)
+                    ,MenuGallery,CheckOut)
 
 class CuisineSerializers(serializers.ModelSerializer):
     class Meta:
@@ -48,3 +48,9 @@ class MenuGallerySerializers(serializers.ModelSerializer):
     class Meta:
         model = MenuGallery
         fields = ['banner_photo']
+
+class CheckOutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CheckOut
+        fields = ['event_name','address_name','delivery','time','description']
+    

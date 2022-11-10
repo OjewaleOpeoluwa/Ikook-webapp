@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager,User
 from django.conf import settings
-
+from datetime import datetime
 
 
 
@@ -70,6 +70,7 @@ class starterMenu(models.Model):
 class MenuGallery(models.Model):
     banner_photo = models.URLField(max_length=255, blank=True, null=True)
 
+
 class SetMenu(models.Model):
     title = models.CharField(max_length=155)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -96,3 +97,15 @@ class MenuReviews(models.Model):
     def __str__(self) -> str:
         return str(self.author)
 
+
+class CheckOut(models.Model):
+    DELIVERY = [
+        ('PHY','Physical'),
+        ('GOU','Gourmet'),
+    ]
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True)
+    event_name = models.CharField(max_length=255)
+    address_name = models.CharField(max_length=200)
+    delivery = models.CharField(max_length=30,choices=DELIVERY)
+    time = models.DateTimeField(default=datetime.now())
+    description = models.TextField()

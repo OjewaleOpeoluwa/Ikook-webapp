@@ -3,7 +3,7 @@ from rest_framework import routers
 
 from .views import (CuisineViewSet,SetMenuViewSet,AddonsViewSet,MainMenuViewSet,
                     SideMenuViewSet,DessertMenuViewSet,StarterMenuViewSet,
-                    MenuReviewsViewSet,MenuGalleryViewSet)
+                    MenuReviewsViewSet,MenuGalleryViewSet,CheckOutViewSet)
 
 urlpatterns = [
     path('cuisine', CuisineViewSet.as_view(),name='cuisine'),
@@ -15,4 +15,5 @@ urlpatterns = [
     path('starter', StarterMenuViewSet.as_view(),name='starter'),
     path('menureviews', MenuReviewsViewSet.as_view(),name='menu_reviews'),
     path('menugallery', MenuGalleryViewSet.as_view(),name='menu_gallery'),
+    path('checkout', CheckOutViewSet.as_view(),name='checkout'),
 ]
