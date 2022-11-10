@@ -191,6 +191,9 @@ AUTHENTICATION_BACKENDS = (
 
  # `allauth` specific authentication methods, such as login by e-mail
  "allauth.account.auth_backends.AuthenticationBackend",
+
+ 'social_core.backends.facebook.FacebookAppOAuth2',
+   'social_core.backends.facebook.FacebookOAuth2',
 )
 
 # SITE_ID = 3
@@ -230,16 +233,13 @@ AUTH_USER_MODEL = 'accounts.MyUser'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 SECURE_SSL_REDIRECT = True
 
-
+# Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
+# Email is not sent by default, to get it, you must request the email permission.
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'locale': 'en_US',
-  'fields': 'id, name, email, age_range'
+   'fields': 'id, name, email'
 }
-
-SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
-SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+SOCIAL_AUTH_USER_FIELDS=['email','first_name','username','password']
 
 
 
