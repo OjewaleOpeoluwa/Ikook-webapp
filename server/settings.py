@@ -192,8 +192,8 @@ AUTHENTICATION_BACKENDS = (
  # `allauth` specific authentication methods, such as login by e-mail
  "allauth.account.auth_backends.AuthenticationBackend",
 
- 'social_core.backends.facebook.FacebookAppOAuth2',
-   'social_core.backends.facebook.FacebookOAuth2',
+#  'social_core.backends.facebook.FacebookAppOAuth2',
+#    'social_core.backends.facebook.FacebookOAuth2',
 )
 
 # SITE_ID = 3
